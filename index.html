@@ -19,6 +19,55 @@
 @media(max-width:800px){.wrap{width:calc(100% - 44px)}.topbar{height:74px;padding:0 22px}.nav,.quick{display:none}.hamb{display:block;margin-left:auto}.hero{grid-template-columns:1fr;gap:45px;padding-top:50px;padding-bottom:50px}.hero h1{font-size:60px}.lede{max-width:540px}.studio{max-width:510px;width:100%;justify-self:center}.section{padding-top:75px}.hero.section{padding-top:45px}.stack-ribbon{flex-direction:column;gap:14px;align-items:flex-start}.stack-names{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:12px 25px}.section-head{gap:22px;align-items:start;flex-direction:column}.section-head p{max-width:510px}.section-head h2{font-size:33px}.project.featured{display:block;grid-column:1/-1}.skills-layout,.education{grid-template-columns:1fr}.skill-grid{gap:26px}.orbital{min-height:340px}.contact-card h2{font-size:37px}.project{padding:22px}.project-top{display:block}.icon-box{margin-bottom:14px}.project-top{display:flex;flex-direction:column-reverse}.project h3{font-size:20px}}
 @media(max-width:540px){.hero h1{font-size:clamp(31px,9.3vw,48px)}.hero .eyebrow{font-size:8px}.hello{font-size:20px}.lede{font-size:13px}.mini-stats{gap:22px}.mini-stats strong{font-size:17px}.mini-stats span{font-size:9px}.mini-stats>div:not(:last-child){padding-right:22px}.projects{grid-template-columns:1fr}.project-count{font-size:9px}.filter button{padding:6px 10px}.project.featured{grid-column:auto}.contact-card{padding:40px 20px}.contact-card h2{font-size:34px}.contact-actions{flex-wrap:wrap}.contact-actions .btn{padding:11px 14px;gap:9px}.footer{align-items:start;gap:20px;font-size:9px}.footer-right>span{display:none}.section-head h2{font-size:30px}.edu-meta{gap:24px}.edu-meta strong{font-size:15px}.preview-description{font-size:9px}.studio-label{font-size:8px}.flow-node{font-size:8px}.flow-node b{width:43px;height:43px}.studio{padding:22px 14px}.skill-copy,.edu-card,.timeline-card{padding:23px}.skill-grid{gap:22px 14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+/* Motion stays decorative: content and controls remain usable when it is off. */
+.nav-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.motion-toggle{display:flex;align-items:center;gap:7px;min-height:34px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;background:white;color:var(--muted);font-size:10px}
+.motion-toggle:hover{color:var(--blue);border-color:#c8d7ee}
+.motion-toggle:disabled{cursor:default;opacity:.7}
+.motion-toggle svg{width:12px;height:12px;fill:currentColor}
+.topbar::after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:2px;background:linear-gradient(90deg,#bed2f4,var(--blue));transform:scaleX(var(--scroll-progress,0));transform-origin:left;pointer-events:none}
+.reveal{animation:none}
+.reveal.motion-ready{transition:opacity .7s ease var(--reveal-delay,0s),translate .7s ease var(--reveal-delay,0s),transform .25s,box-shadow .25s,border-color .25s}
+.motion-enabled .reveal.motion-ready:not(.is-revealed){opacity:0;translate:0 22px}
+.reveal.motion-ready:focus-within{opacity:1!important;translate:0 0!important}
+.studio{isolation:isolate}
+.studio::before{content:'';position:absolute;z-index:-1;inset:5%;border-radius:50%;background:radial-gradient(ellipse,#d9e7ff99,transparent 65%);pointer-events:none;animation:light-drift 11s ease-in-out infinite alternate paused}
+.system-preview{animation:card-float 6.5s ease-in-out infinite paused}
+.flow-node b{animation:pipeline-step 6.4s ease-in-out infinite paused;animation-delay:calc(var(--step,0)*1.6s)}
+.flow-arrow{position:relative}
+.flow-arrow::after{content:'';position:absolute;left:0;top:50%;width:4px;height:4px;background:var(--blue);border-radius:50%;opacity:0;animation:packet-travel 6.4s linear infinite paused;animation-delay:calc(var(--step,0)*1.6s)}
+.orbit{animation:orbit-turn 32s linear infinite paused}
+.orbit.o2{animation-duration:48s;animation-direction:reverse}
+.orbit::before{content:'';position:absolute;left:50%;top:-3px;width:5px;height:5px;border-radius:50%;background:#8faee0;box-shadow:0 0 0 4px #dfe9f955}
+.orb{animation:chip-float 5.5s ease-in-out infinite paused}
+.o-b{animation-delay:-1.4s;animation-duration:6.5s}.o-c{animation-delay:-2.8s}.o-d{animation-delay:-.7s;animation-duration:7s}.o-e{animation-delay:-3.8s;animation-duration:6s}.o-f{animation-delay:-2s;animation-duration:7.5s}
+.core{position:relative}
+.core::after{content:'';position:absolute;inset:-10px;border:1px solid #c9daf4;border-radius:32px;opacity:0;pointer-events:none;animation:core-ripple 5s ease-out infinite paused}
+.motion-enabled .motion-in-view :is(.system-preview,.flow-node b,.orb,.orbit),
+.motion-enabled .motion-in-view .flow-arrow::after,
+.motion-enabled .motion-in-view .core::after,
+.motion-enabled .studio.motion-in-view::before{animation-play-state:running}
+.motion-paused :is(.system-preview,.flow-node b,.orb,.orbit),
+.motion-paused .flow-arrow::after,.motion-paused .core::after,.motion-paused .studio::before{animation:none}
+.page-hidden *,.page-hidden *::before,.page-hidden *::after{animation-play-state:paused!important}
+.btn>span{display:inline-block;transition:transform .25s}
+.btn:hover>span{transform:translate(2px,-2px)}
+.skill-list .chip{transition:transform .2s,border-color .2s,background .2s}
+.skill-list .chip:hover{transform:translateY(-3px);border-color:#c0d2f0;background:var(--soft)}
+.details.open{animation:detail-enter .28s ease-out}
+.motion-paused{scroll-behavior:auto}
+.motion-paused .reveal.motion-ready{transition:none}
+.motion-paused .details.open{animation:none}
+@keyframes card-float{0%,100%{translate:0 0}50%{translate:0 -9px}}
+@keyframes chip-float{0%,100%{translate:0 0}50%{translate:0 -8px}}
+@keyframes light-drift{from{transform:translate(-12px,8px) scale(.9)}to{transform:translate(18px,-12px) scale(1.1)}}
+@keyframes orbit-turn{to{transform:rotate(360deg)}}
+@keyframes core-ripple{0%{transform:scale(.95);opacity:0}25%{opacity:.65}85%,100%{transform:scale(1.3);opacity:0}}
+@keyframes pipeline-step{0%,28%,100%{transform:translateY(0);background:#f7f9fc;border-color:#e2e8f1;box-shadow:0 0 0 0 #dbe7fc00}5%,20%{transform:translateY(-3px);background:#eaf2ff;border-color:#92b3ea;box-shadow:0 0 0 4px #e7effc99}}
+@keyframes packet-travel{0%,13%{opacity:0;transform:translate(-3px,-50%)}17%{opacity:.85}26%{opacity:0;transform:translate(14px,-50%)}100%{opacity:0;transform:translate(14px,-50%)}}
+@keyframes detail-enter{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:800px){.nav-actions{width:100%;justify-content:space-between}.nav-actions .hamb{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.reveal.motion-ready{opacity:1!important;translate:none!important}.btn:hover>span,.skill-list .chip:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -28,8 +77,11 @@
   <nav class="nav" id="nav" aria-label="Main navigation">
     <button data-go="about">about</button><button data-go="projects">projects</button><button data-go="skills">skills</button><button data-go="education">education</button><button data-go="contact">contact</button>
   </nav>
-  <button class="quick" id="quick"><span>⌕</span><span>Quick nav</span><kbd>Ctrl K</kbd></button>
-  <button class="hamb" id="hamb" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+  <div class="nav-actions">
+    <button class="motion-toggle" id="motionToggle" aria-label="Pause animations" aria-pressed="false"><svg viewBox="0 0 12 12" aria-hidden="true"><path id="motionIcon" d="M2 1h3v10H2zM7 1h3v10H7z"/></svg><span id="motionLabel">Motion on</span></button>
+    <button class="quick" id="quick"><span>⌕</span><span>Quick nav</span><kbd>Ctrl K</kbd></button>
+    <button class="hamb" id="hamb" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+  </div>
 </header>
 <div class="mobile-menu" id="mobileMenu">
   <button data-go="about">About</button><button data-go="projects">Projects</button><button data-go="skills">Skills</button><button data-go="education">Education</button><button data-go="contact">Contact</button>
@@ -51,7 +103,7 @@
       <div><strong>2027</strong><span>graduation</span></div>
     </div>
   </div>
-  <div class="studio reveal" aria-label="Interactive system architecture explorer">
+  <div class="studio reveal" data-motion-scene aria-label="Interactive system architecture explorer">
   <div class="studio-label"><span>A little look under the hood</span><span>● &nbsp; Always building</span></div>
   <div class="system-preview" id="systemPanel" role="tabpanel" aria-labelledby="tab-rag">
     <div class="preview-toolbar"><div class="lights" aria-hidden="true"><i></i><i></i><i></i></div><span id="previewFilename">retrieval.pipeline</span><span aria-hidden="true">↗</span></div>
@@ -80,7 +132,7 @@
         <div class="skill-group"><h4>Data</h4><div class="skill-list"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">ChromaDB</span><span class="chip">DuckDB</span></div></div>
       </div>
     </div>
-    <div class="constellation orbital reveal">
+    <div class="constellation orbital reveal" data-motion-scene>
       <div class="orbit o1"></div><div class="orbit o2"></div><div class="core">AI ×<br>Systems</div><span class="orbital-caption">CONNECTED BY CURIOSITY</span>
       <div class="orb o-a">RAG</div><div class="orb o-b">FastAPI</div><div class="orb o-c">Redis</div><div class="orb o-d">LangGraph</div><div class="orb o-e">WebSockets</div><div class="orb o-f">PyTorch</div>
     </div>
@@ -113,12 +165,15 @@ const projects = [
  {id:'analyst',title:'Autonomous Data Analyst',eyebrow:'AGENTIC AI / ANALYTICS',description:'Natural-language data analysis agent that turns questions into SQL, investigates hypotheses and explains evidence from datasets.',repo:'https://github.com/o-m-s-h/autonomous-data-analyst',stack:['FastAPI','LangGraph','DuckDB','React','OpenRouter'],metrics:['100+ analysis queries','~95% answer accuracy','Multi-step investigation'],architecture:['Question','Agent','DuckDB Tools','Evidence'],category:'AI',accent:'rose',details:['Agent state tracks datasets, executed queries, results and hypotheses.','Tool-calling flow inspects schemas and executes SQL against DuckDB.','Autonomous investigation can generate and test multiple hypotheses.','Analysis covers numerical correlations and categorical group comparisons.']}
 ];
 let currentFilter='All';
+let revealObserver=null;
 const grid=document.getElementById('projectGrid');
 function iconFor(id){return ({rag:'◈',chat:'ϟ',ppe:'⬡',scheduler:'⌘',analyst:'◇'})[id]||'◆'}
 function renderProjects(){
+ if(revealObserver)grid.querySelectorAll('.reveal').forEach(card=>revealObserver.unobserve(card));
  const visible=currentFilter==='All'?projects:projects.filter(p=>p.category===currentFilter);
  grid.innerHTML=visible.map((p,i)=>`<article class="project reveal visible ${currentFilter==='All'&&i===0?'featured':currentFilter==='All'&&i===1?'side':''}" data-accent="${p.accent}"><div class="accent"></div><div class="project-top"><div><div class="project-kicker">${p.eyebrow}</div><h3>${p.title}</h3><p>${p.description}</p></div><div class="icon-box">${iconFor(p.id)}</div></div><div class="chips">${p.stack.map(s=>`<span class="chip">${s}</span>`).join('')}</div><div class="arch">${p.architecture.map((a,j)=>`${j?'<span class="arrow">→</span>':''}<span class="node">${a}</span>`).join('')}</div><div class="metrics">${p.metrics.map(m=>`<div class="metric">${m}</div>`).join('')}</div><div class="project-foot"><a class="link" href="${p.repo}" target="_blank" rel="noreferrer">View repository ↗</a><button class="expand" data-expand="${p.id}" aria-expanded="false" aria-controls="details-${p.id}">Case study +</button></div><div class="details" id="details-${p.id}"><ul>${p.details.map(d=>`<li>${d}</li>`).join('')}</ul></div></article>`).join('');
  document.querySelectorAll('[data-expand]').forEach(btn=>btn.addEventListener('click',()=>{const d=document.getElementById('details-'+btn.dataset.expand);const open=d.classList.toggle('open');btn.textContent=open?'Close −':'Case study +';btn.setAttribute('aria-expanded',String(open))}));
+ if(revealObserver)observeReveals(grid);
 }
 renderProjects();
 
@@ -131,7 +186,7 @@ let previousFocus=null;
 function closeMenu(){mobile.classList.remove('open');hamb.setAttribute('aria-expanded','false')}
 function closePalette(restore=true){palette.classList.remove('open');document.body.style.overflow='';if(restore)previousFocus?.focus()}
 function openPalette(){previousFocus=document.activeElement;search.value='';filterNavigation();palette.classList.add('open');document.body.style.overflow='hidden';search.focus()}
-function go(id){closePalette(false);closeMenu();const section=document.getElementById(id);section?.scrollIntoView({behavior:reducedMotion.matches?'instant':'smooth'});if(section){section.setAttribute('tabindex','-1');section.focus({preventScroll:true})}}
+function go(id){closePalette(false);closeMenu();const section=document.getElementById(id);section?.scrollIntoView({behavior:document.documentElement.classList.contains('motion-enabled')?'smooth':'instant'});if(section){section.setAttribute('tabindex','-1');section.focus({preventScroll:true})}}
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
 hamb.addEventListener('click',()=>{const open=mobile.classList.toggle('open');hamb.setAttribute('aria-expanded',String(open))});
 document.addEventListener('click',e=>{if(!mobile.contains(e.target)&&!hamb.contains(e.target))closeMenu()});
@@ -152,21 +207,91 @@ document.addEventListener('keydown',e=>{
  if(e.key==='Tab'){const items=[search,document.getElementById('closePalette'),...buttons],first=items[0],last=items.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
 });
 const sections=['about','projects','skills','education','contact'];const navBtns=[...document.querySelectorAll('#nav [data-go]')];
-function setActive(){let active='about';for(const id of sections){if(document.getElementById(id).getBoundingClientRect().top<innerHeight*.38)active=id}if(innerHeight+scrollY>=document.documentElement.scrollHeight-8)active='contact';navBtns.forEach(b=>{b.classList.toggle('active',b.dataset.go===active);if(b.dataset.go===active)b.setAttribute('aria-current','location');else b.removeAttribute('aria-current')})}
-addEventListener('scroll',setActive,{passive:true});setActive();
+function setActive(){
+ let active='about';
+ for(const id of sections){if(document.getElementById(id).getBoundingClientRect().top<innerHeight*.38)active=id}
+ const scrollRange=document.documentElement.scrollHeight-innerHeight;
+ if(scrollRange>0&&scrollY>=scrollRange-8)active='contact';
+ navBtns.forEach(b=>{b.classList.toggle('active',b.dataset.go===active);if(b.dataset.go===active)b.setAttribute('aria-current','location');else b.removeAttribute('aria-current')});
+ document.documentElement.style.setProperty('--scroll-progress',scrollRange>0?Math.min(1,Math.max(0,scrollY/scrollRange)):0);
+}
+let scrollFrame=0;
+function queueScrollUpdate(){if(!scrollFrame)scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;setActive()})}
+addEventListener('scroll',queueScrollUpdate,{passive:true});
+addEventListener('resize',queueScrollUpdate);
+if('ResizeObserver' in window)new ResizeObserver(queueScrollUpdate).observe(document.body);
+setActive();
 const systemViews={
  rag:{file:'retrieval.pipeline',title:'From a question to clarity.',description:'A retrieval pipeline that gives answers a source.',nodes:['Question','Retrieve','Rerank','Answer'],icons:['?','▤','≋','✧'],result:'Source-grounded answers',detail:'Hybrid search + reranking. Context before confidence.'},
  chat:{file:'realtime.pipeline',title:'A little closer. In real time.',description:'A message takes a trip from one person to another.',nodes:['Message','Socket.IO','Persist','Deliver'],icons:['▤','ϟ','▱','✓'],result:'Built for live conversations',detail:'Authenticated messages, online presence, and read receipts.'},
  scheduler:{file:'distributed.pipeline',title:'The right work. At the right time.',description:'Coordinated workers keep background tasks moving.',nodes:['Schedule','Queue','Worker','Recover'],icons:['◷','≋','⚙','↻'],result:'Designed to recover',detail:'Atomic claims and visibility timeouts keep workers coordinated.'}
 };
 const systemTabs=[...document.querySelectorAll('[data-system]')];
-function selectSystem(key){const s=systemViews[key];systemTabs.forEach(b=>{const active=b.dataset.system===key;b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1});document.getElementById('systemPanel').setAttribute('aria-labelledby','tab-'+key);document.getElementById('previewFilename').textContent=s.file;document.getElementById('previewTitle').textContent=s.title;document.getElementById('previewDescription').textContent=s.description;document.getElementById('previewFlow').innerHTML=s.nodes.map((n,i)=>(i?'<span class="flow-arrow" aria-hidden="true">→</span>':'')+'<div class="flow-node '+(i===1?'active':'')+'"><b aria-hidden="true">'+s.icons[i]+'</b><span>'+n+'</span></div>').join('');document.getElementById('previewResult').innerHTML='<span class="result-dot"></span><strong>'+s.result+'</strong><br>'+s.detail}
+function selectSystem(key){
+ const s=systemViews[key];
+ systemTabs.forEach(b=>{const active=b.dataset.system===key;b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1});
+ document.getElementById('systemPanel').setAttribute('aria-labelledby','tab-'+key);
+ document.getElementById('previewFilename').textContent=s.file;
+ document.getElementById('previewTitle').textContent=s.title;
+ document.getElementById('previewDescription').textContent=s.description;
+ document.getElementById('previewFlow').innerHTML=s.nodes.map((n,i)=>`${i?`<span class="flow-arrow" style="--step:${i-1}" aria-hidden="true">→</span>`:''}<div class="flow-node" style="--step:${i}"><b aria-hidden="true">${s.icons[i]}</b><span>${n}</span></div>`).join('');
+ document.getElementById('previewResult').innerHTML='<span class="result-dot"></span><strong>'+s.result+'</strong><br>'+s.detail;
+}
 systemTabs.forEach((b,i)=>{b.addEventListener('click',()=>selectSystem(b.dataset.system));b.addEventListener('keydown',e=>{let index=i;if(e.key==='ArrowRight')index=(i+1)%3;else if(e.key==='ArrowLeft')index=(i+2)%3;else if(e.key==='Home')index=0;else if(e.key==='End')index=2;else return;e.preventDefault();selectSystem(systemTabs[index].dataset.system);systemTabs[index].focus()})});selectSystem('rag');
 const toast=document.getElementById('toast');let toastTimer;
 document.getElementById('copyEmail').addEventListener('click',async()=>{let copied=false;try{await navigator.clipboard.writeText('omkar.shewalkar936@gmail.com');copied=true}catch{const t=document.createElement('textarea');t.value='omkar.shewalkar936@gmail.com';t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();copied=document.execCommand('copy');t.remove();document.getElementById('copyEmail').focus()}toast.textContent=copied?'Email copied — let’s talk!':'Email: omkar.shewalkar936@gmail.com';toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),copied?2400:7000)});
 
+// Reveal once on entry; pause ambient animations offscreen and in hidden tabs.
+const motionToggle=document.getElementById('motionToggle');
+let motionPaused=false;
+try{motionPaused=localStorage.getItem('portfolio-motion-paused')==='true'}catch{}
+function applyMotionPreference(){
+ const stopped=motionPaused||reducedMotion.matches;
+ document.documentElement.classList.toggle('motion-enabled',!stopped);
+ document.documentElement.classList.toggle('motion-paused',stopped);
+ motionToggle.setAttribute('aria-pressed',String(stopped));
+ motionToggle.setAttribute('aria-label',reducedMotion.matches?'Animations disabled by your reduced-motion preference':stopped?'Resume animations':'Pause animations');
+ motionToggle.disabled=reducedMotion.matches;
+ document.getElementById('motionLabel').textContent=stopped?'Motion off':'Motion on';
+ document.getElementById('motionIcon').setAttribute('d',stopped?'M3 1l8 5-8 5z':'M2 1h3v10H2zM7 1h3v10H7z');
+ if(stopped){
+  document.querySelectorAll('.motion-ready').forEach(el=>el.classList.add('is-revealed'));
+  revealObserver?.disconnect();
+ }
+}
+motionToggle.addEventListener('click',()=>{
+ motionPaused=!motionPaused;
+ try{localStorage.setItem('portfolio-motion-paused',String(motionPaused))}catch{}
+ applyMotionPreference();
+});
+reducedMotion.addEventListener('change',applyMotionPreference);
+applyMotionPreference();
+function observeReveals(scope=document){
+ const enabled=document.documentElement.classList.contains('motion-enabled');
+ scope.querySelectorAll('.reveal:not(.motion-ready)').forEach((el,index)=>{
+  el.style.setProperty('--reveal-delay',`${Math.min(index%3,2)*75}ms`);
+  el.classList.add('motion-ready');
+  if(enabled&&revealObserver)revealObserver.observe(el);
+  else el.classList.add('is-revealed');
+ });
+}
+if('IntersectionObserver' in window){
+ revealObserver=new IntersectionObserver(entries=>{
+  entries.forEach(({target,isIntersecting})=>{
+   if(isIntersecting){target.classList.add('is-revealed');revealObserver.unobserve(target)}
+  });
+ },{threshold:0,rootMargin:'0px 0px -24px 0px'});
+ const ambientObserver=new IntersectionObserver(entries=>{
+  entries.forEach(({target,isIntersecting})=>target.classList.toggle('motion-in-view',isIntersecting));
+ },{threshold:0});
+ document.querySelectorAll('[data-motion-scene]').forEach(el=>ambientObserver.observe(el));
+}else{
+ document.querySelectorAll('[data-motion-scene]').forEach(el=>el.classList.add('motion-in-view'));
+}
+observeReveals();
+function syncPageVisibility(){document.documentElement.classList.toggle('page-hidden',document.hidden)}
+document.addEventListener('visibilitychange',syncPageVisibility);
+syncPageVisibility();
 </script>
 </body>
 </html>
-
-
